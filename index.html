@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quanto AI | Orçamentos Inteligentes em PDF</title>
+    <meta
+      name="description"
+      content="Gere orçamentos profissionais em PDF conversando por voz ou texto com um chatbot que entende suas necessidades e refina cada detalhe."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="container nav-content">
+        <div class="logo">Quanto<span>AI</span></div>
+        <nav class="nav-links">
+          <a href="#como-funciona">Como Funciona</a>
+          <a href="#beneficios">Benefícios</a>
+          <a href="#demo">Demo</a>
+          <a href="#precos">Preços</a>
+          <a href="#canais">Canais</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <div class="nav-cta">
+          <a class="btn btn-sm ghost" href="#login">Entrar</a>
+          <a class="btn btn-sm primary" href="#cta">Começar</a>
+        </div>
+        <button class="nav-toggle" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <section class="hero" id="topo">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1>
+            Orçamentos em PDF gerados por conversa.
+            <span class="gradient">Simples, rápido e preciso.</span>
+          </h1>
+          <p class="subtitle">
+            Peça por voz ou texto. Ajuste itens, valores, impostos e condições.
+            A IA também sugere faixas de preço base de mercado antes de gerar o
+            PDF.
+          </p>
+          <div class="hero-cta">
+            <a href="#cta" class="btn primary btn-lg">Experimente Grátis</a>
+            <button
+              class="btn outline btn-lg"
+              id="play-audio-demo"
+              aria-label="Ouvir exemplo"
+            >
+              ▶ Ouvir Exemplo
+            </button>
+          </div>
+          <div class="social-proof">
+            <span
+              >Confiado por equipes de vendas, freelancers e escritórios</span
+            >
+            <div class="avatars">
+              <div class="avatar"></div>
+              <div class="avatar"></div>
+              <div class="avatar"></div>
+              <div class="more">+120</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-media">
+          <div class="mockup">
+            <div class="chat-window" id="chat-window">
+              <div class="msg bot">
+                Olá! Me diga o que você precisa orçar hoje.
+              </div>
+              <div class="msg user">
+                Preciso de um orçamento para desenvolver um site institucional e
+                manutenção.
+              </div>
+              <div class="msg bot">
+                Incluo design, desenvolvimento e suporte mensal?
+              </div>
+              <div class="msg user">Sim. Coloca 3 opções de pacote.</div>
+              <div class="msg bot emph">
+                Gerando PDF profissional com 3 pacotes...
+              </div>
+            </div>
+            <div class="pdf-preview">
+              <div class="pdf-page">
+                <div class="pdf-header">Orçamento #2025-118</div>
+                <div class="pdf-block">
+                  <div class="pdf-title">Pacote Essencial</div>
+                  <ul>
+                    <li>Site institucional (até 5 páginas)</li>
+                    <li>Design responsivo</li>
+                    <li>Entrega em 10 dias</li>
+                    <li class="price">R$ 4.500</li>
+                  </ul>
+                </div>
+                <div class="pdf-block">
+                  <div class="pdf-title">Pacote Profissional</div>
+                  <ul>
+                    <li>Site completo (até 12 páginas)</li>
+                    <li>Blog + SEO básico</li>
+                    <li>Suporte 3 meses</li>
+                    <li class="price">R$ 8.900</li>
+                  </ul>
+                </div>
+                <div class="pdf-fade"></div>
+              </div>
+            </div>
+          </div>
+          <div class="floating-card voice-tip">
+            Fale: “Gerar orçamento para evento corporativo com coffee break e
+            audiovisual.”
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="marquee">
+      <div class="marquee-inner" id="marqueeInner">
+        <div class="marquee-group" id="marqueeGroup">
+          <span>Gere PDFs Profissionais</span>
+          <span>Integração Fiscal</span>
+          <span>Voz e Texto</span>
+          <span>Multi Idioma</span>
+          <span>Edição Iterativa</span>
+          <span>Envio por Link</span>
+          <span>Assinatura Digital</span>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <span>Gere PDFs Profissionais</span>
+          <span>Integração Fiscal</span>
+          <span>Voz e Texto</span>
+          <span>Multi Idioma</span>
+          <span>Edição Iterativa</span>
+          <span>Envio por Link</span>
+          <span>Assinatura Digital</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="como-funciona">
+      <div class="container">
+        <h2>Como funciona</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="num">1</div>
+            <h3>Converse</h3>
+            <p>
+              Fale ou digite o que precisa orçar. O bot entende contexto,
+              unidades e condicionais.
+            </p>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h3>Refine</h3>
+            <p>
+              Ajuste quantidades, margens, impostos ou adicione pacotes e
+              opções. Peça sugestão de preço médio e use como ponto de partida.
+            </p>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <h3>Receba o PDF</h3>
+            <p>
+              Baixe ou envie um link. Layout limpo, valores somados e condições
+              claras.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits" id="beneficios">
+      <div class="container">
+        <h2>Por que usar o Quanto AI?</h2>
+        <div class="benefit-grid">
+          <div class="benefit">
+            <h3>Economia de Tempo</h3>
+            <p>Reduza horas montando planilhas e formatando documentos.</p>
+          </div>
+          <div class="benefit">
+            <h3>Consistência</h3>
+            <p>
+              Padrões de layout, descrições e impostos aplicados
+              automaticamente.
+            </p>
+          </div>
+          <div class="benefit">
+            <h3>Iteração Natural</h3>
+            <p>Não recomece do zero: apenas peça mudanças e o PDF se adapta.</p>
+          </div>
+          <div class="benefit">
+            <h3>Conversão Maior</h3>
+            <p>
+              Documentos claros e profissionais aceleram a decisão do cliente.
+            </p>
+          </div>
+          <div class="benefit">
+            <h3>Audio + Texto</h3>
+            <p>Capture ideias rápido em reuniões ou durante deslocamentos.</p>
+          </div>
+          <div class="benefit">
+            <h3>Escalável</h3>
+            <p>Equipe inteira padroniza propostas sem treinamento extenso.</p>
+          </div>
+          <div class="benefit">
+            <h3>Sugestão de Preços</h3>
+            <p>
+              Consulta referências públicas e histórico interno para sugerir
+              valores iniciais realistas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="interactive-demo" id="demo">
+      <div class="container">
+        <h2>Teste a experiência</h2>
+        <p class="section-sub">
+          Simulação local. Exemplifica a lógica de refinamento contínuo.
+        </p>
+        <div class="demo-box">
+          <div class="demo-chat" id="demo-chat"></div>
+          <div class="demo-controls">
+            <input
+              id="demoInput"
+              type="text"
+              placeholder="Digite um pedido de orçamento..."
+            />
+            <button class="btn primary" id="demoSend">Enviar</button>
+            <button class="btn ghost" id="demoReset">Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="precos">
+      <div class="container">
+        <h2>Planos Simples</h2>
+        <p class="section-sub">
+          Escolha o período de acesso contínuo ao bot para gerar quantos
+          orçamentos quiser.
+        </p>
+        <div class="pricing-grid">
+          <div class="price-card">
+            <h3>1 Dia</h3>
+            <div class="price-line">
+              <span class="amount">R$ 10</span><span class="period">/24h</span>
+            </div>
+            <ul class="feat-list">
+              <li>Acesso imediato</li>
+              <li>Orçamentos ilimitados no período</li>
+              <li>Voz e texto</li>
+              <li>Exportação PDF</li>
+            </ul>
+            <a href="#cta" class="btn outline block">Começar 24h</a>
+          </div>
+          <div class="price-card">
+            <h3>7 Dias</h3>
+            <div class="price-line">
+              <span class="amount">R$ 50</span
+              ><span class="period">/semana</span>
+            </div>
+            <ul class="feat-list">
+              <li>Tudo do 1 Dia</li>
+              <li>Ideal para pequenos projetos</li>
+              <li>Refinamentos ilimitados</li>
+              <li>Compartilhamento por link</li>
+            </ul>
+            <a href="#cta" class="btn outline block">Ativar 7 dias</a>
+          </div>
+          <div class="price-card highlight">
+            <div class="badge">Melhor Opção</div>
+            <h3>30 Dias</h3>
+            <div class="price-line">
+              <span class="amount">R$ 100</span><span class="period">/mês</span>
+            </div>
+            <ul class="feat-list">
+              <li>Menor custo diário</li>
+              <li>Integrações futuras incluídas</li>
+              <li>Suporte prioritário</li>
+              <li>Atualizações contínuas</li>
+            </ul>
+            <a href="#cta" class="btn primary block">Assinar 30 dias</a>
+          </div>
+        </div>
+        <div style="margin-top: 34px; font-size: 12px; color: #596574">
+          O plano de 30 dias sai mais barato proporcionalmente. Valores em BRL.
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits" id="canais">
+      <div class="container">
+        <h2>Canais de Acesso</h2>
+        <div class="benefit-grid">
+          <div class="benefit">
+            <h3>WhatsApp</h3>
+            <p>
+              Use direto no seu dia a dia:
+              <a href="https://wa.me/31973560034" target="_blank" rel="noopener"
+                >+31 97356-0034</a
+              >. Inicie dizendo o que deseja orçar.
+            </p>
+          </div>
+          <div class="benefit">
+            <h3>Telegram</h3>
+            <p>
+              Acesse o bot em
+              <a
+                href="https://t.me/crie_rocamento_bot"
+                target="_blank"
+                rel="noopener"
+                >@crie_rocamento_bot</a
+              >
+              e comece a gerar PDFs com /start.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="cta">
+      <div class="container cta-box">
+        <h2>Comece a gerar orçamentos agora</h2>
+        <p>Crie uma conta gratuita e gere seus primeiros PDFs em minutos.</p>
+        <form class="signup" id="signupForm">
+          <input type="email" id="email" placeholder="Seu email" required />
+          <button type="submit" class="btn primary">Criar Conta</button>
+        </form>
+        <div class="mini">Sem cartão de crédito • Cancelamento simples</div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="container">
+        <h2>Perguntas Frequentes</h2>
+        <div class="faq-list" id="faqList">
+          <div class="faq-item">
+            <button class="faq-q">
+              O PDF é realmente automático?<span class="icon">+</span>
+            </button>
+            <div class="faq-a">
+              Sim. A IA entende sua descrição e monta o documento com itens,
+              categorias e totais.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              Posso editar manualmente depois?<span class="icon">+</span>
+            </button>
+            <div class="faq-a">
+              Pode ajustar qualquer texto, valores e adicionar termos comerciais
+              customizados.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              Como funciona a parte de voz?<span class="icon">+</span>
+            </button>
+            <div class="faq-a">
+              Usamos reconhecimento de fala em tempo real. Basta tocar no
+              microfone e ditar.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              E dados fiscais?<span class="icon">+</span>
+            </button>
+            <div class="faq-a">
+              Você configura regras e alíquotas para seu segmento. O sistema
+              aplica automaticamente.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              Como a IA sugere preços?<span class="icon">+</span>
+            </button>
+            <div class="faq-a">
+              Analisa descrições dos itens, categoria e contexto e cruza com
+              bases públicas e dados anonimizados internos para propor uma
+              faixa. Você sempre pode ajustar antes de gerar o PDF.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo">Quanto<span>AI</span></div>
+          <p class="footer-text">
+            Conversas que viram orçamentos profissionais.
+          </p>
+        </div>
+        <div>
+          <h4>Produto</h4>
+          <ul>
+            <li><a href="#como-funciona">Como funciona</a></li>
+            <li><a href="#precos">Preços</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacidade</a></li>
+            <li><a href="#">Termos</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container copy">
+        <span>© 2025 Quanto AI</span>
+        <span>Feito com ♡ no Brasil</span>
+      </div>
+    </footer>
+
+    <script src="./src/app.js"></script>
+  </body>
+</html>
