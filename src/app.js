@@ -112,20 +112,6 @@ playBtn?.addEventListener('click', () => {
     addLine();
 });
 
-// Newsletter simples
-const signupForm = document.getElementById('signupForm');
-signupForm?.addEventListener('submit', e => {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    signupForm.innerHTML = `<span style="font-weight:600">Obrigado!</span> Verifique seu email (${email}).`;
-});
+// Bloco de newsletter removido (form não está presente na página)
 
-// Removido marquee dinâmico anterior; estrutura agora é puramente CSS.
-// Opcional: equalizar largura dos grupos para suavizar qualquer variação de espaçamento.
-(function fixMarqueeWidths() {
-    const groups = document.querySelectorAll('.marquee-group');
-    if (groups.length < 2) return;
-    // Usa largura do primeiro grupo como base
-    const w = groups[0].getBoundingClientRect().width;
-    groups.forEach(g => g.style.minWidth = w + 'px');
-})();
+// Marquee usa apenas CSS; nenhuma manipulação de estilo inline necessária
