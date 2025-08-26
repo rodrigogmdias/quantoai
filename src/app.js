@@ -3,6 +3,15 @@ const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 navToggle?.addEventListener('click', () => navLinks.classList.toggle('open'));
 
+// Utilitário: envio seguro de eventos GA4
+function gaEvent(name, params = {}) {
+    try {
+        if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+            window.gtag('event', name, params);
+        }
+    } catch (_) { /* noop */ }
+}
+
 // FAQ accordion
 const faqItems = document.querySelectorAll('.faq-item');
 faqItems.forEach(i => {
@@ -165,6 +174,12 @@ function buildUtm(plan) {
 }
 
 chooseWhatsApp?.addEventListener('click', () => {
+    // GA: clique para WhatsApp via modal
+    gaEvent('contact_click', {
+        channel: 'whatsapp',
+        source: 'modal',
+        plan: pendingPlan || 'na'
+    });
     // wa.me supports text param
     const text = `Quero ativar o Quanto AI (${pendingPlan || 'plano não selecionado'}).`;
     const utm = buildUtm(pendingPlan);
@@ -174,6 +189,12 @@ chooseWhatsApp?.addEventListener('click', () => {
 });
 
 chooseTelegram?.addEventListener('click', () => {
+    // GA: clique para Telegram via modal
+    gaEvent('contact_click', {
+        channel: 'telegram',
+        source: 'modal',
+        plan: pendingPlan || 'na'
+    });
     const utm = buildUtm(pendingPlan);
     // Telegram deep link with start param
     const startParam = encodeURIComponent(`from=lp&plan=${pendingPlan || 'na'}`);
@@ -182,4 +203,27 @@ chooseTelegram?.addEventListener('click', () => {
     const withUtm = `${url}#${utm}`;
     window.open(withUtm, '_blank', 'noopener');
     closeModal();
+});
+
+// GA: cliques diretos nos cards de canais (seção "Canais de Acesso")
+document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a => {
+    a.addEventListener('click', () => {
+        gaEvent('contact_click', {
+            channel: 'whatsapp',
+            source: 'channels_section',
+            intent: a.href.includes('text=') ? 'start_chat' : 'view_number',
+            link_text: (a.textContent || '').trim().slice(0, 100)
+        });
+    });
+});
+
+document.querySelectorAll('a[href^="https://t.me/"]').forEach(a => {
+    a.addEventListener('click', () => {
+        gaEvent('contact_click', {
+            channel: 'telegram',
+            source: 'channels_section',
+            intent: a.href.includes('?start=') ? 'start_bot' : 'view_bot',
+            link_text: (a.textContent || '').trim().slice(0, 100)
+        });
+    });
 });
