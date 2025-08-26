@@ -4,6 +4,7 @@
   --bg-alt: #0e1116;
   --panel: #141820;
   --panel-alt: #1b2029;
+  --nav-h: 70px;
   --brand: linear-gradient(90deg,#7f5af0,#5f9fff,#22d3ee);
   --brand-accent: #7f5af0;
   --text: #e8ecf1;
@@ -24,11 +25,11 @@ img { max-width:100%; display:block; }
 
 .container { width:100%; max-width: var(--container); margin:0 auto; padding:0 24px; }
 
-.nav { position:sticky; top:0; backdrop-filter: blur(14px); background:rgba(7,9,12,.72); border-bottom:1px solid #20262f; z-index:50; }
-.nav-content { display:flex; align-items:center; gap:40px; height:70px; }
+.nav { position:sticky; top:0; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); background:rgba(7,9,12,.72); /* remover borda que causa hairline no sticky */ border-bottom:0; box-shadow: inset 0 -1px 0 #1c242d; z-index:50; /* força nova camada e evita artefatos */ transform: translateZ(0); }
+.nav-content { display:flex; align-items:center; gap:40px; height: var(--nav-h); }
 .logo { font-size:22px; font-weight:700; letter-spacing:.5px; }
 .logo span { background:var(--brand); -webkit-background-clip:text; background-clip:text; color:transparent; }
-.nav-links { display:flex; gap:28px; font-size:14px; }
+.nav-links { display:flex; gap:28px; font-size:14px; opacity:1; pointer-events:auto; }
 .nav-links a { color: var(--text-dim); font-weight:500; }
 .nav-links a:hover { color: var(--text); }
 .nav-cta { margin-left:auto; display:flex; gap:12px; }
@@ -187,10 +188,15 @@ img { max-width:100%; display:block; }
   .demo-box { grid-template-columns:1fr; }
 }
 @media (max-width: 780px) {
-  .nav-links { position:fixed; inset:70px 0 auto 0; background:#0b1015; flex-direction:column; padding:30px 24px 40px; gap:20px; transform:translateY(-120%); transition:.45s; border-bottom:1px solid #1c242d; }
-  .nav-links.open { transform:translateY(0); }
-  .nav-toggle { display:block; }
+  .nav-links { position:fixed; inset:var(--nav-h) 0 auto 0; background:#0b1015; flex-direction:column; padding:30px 24px 40px; gap:20px; 
+    transform: translateY(calc(-100% - var(--nav-h) - 2px)); will-change: transform; transition: transform .45s ease, opacity .25s ease; border-bottom:1px solid #1c242d; opacity:0; pointer-events:none; }
+  .nav-links.open { transform:translateY(0); opacity:1; pointer-events:auto; }
+  /* Alinha o header no mobile: ícone do menu vai para a direita */
+  .nav-content { gap:16px; }
+  .nav-toggle { display:block; margin-left:auto; }
   .nav-cta { display:none; }
+  /* Evita hairline/linha no topo em iOS/Safari: remove blur e separador */
+  .nav { background:#0b1015; -webkit-backdrop-filter:none; backdrop-filter:none; box-shadow:none; padding-top: max(0px, env(safe-area-inset-top)); }
 }
 
 @keyframes fadeUp { 0% { opacity:0; transform:translateY(10px);} 100% { opacity:1; transform:translateY(0);} }
