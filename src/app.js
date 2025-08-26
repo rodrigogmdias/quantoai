@@ -82,7 +82,7 @@ demoReset?.addEventListener('click', () => {
     renderChat();
 });
 
-// Fake audio demo
+// Simulação de conversa (sem áudio)
 const playBtn = document.getElementById('play-audio-demo');
 playBtn?.addEventListener('click', () => {
     playBtn.disabled = true;
@@ -94,7 +94,7 @@ playBtn?.addEventListener('click', () => {
     let idx = 0;
     const chatWindow = document.getElementById('chat-window');
     function addLine() {
-        if (idx >= lines.length) { playBtn.disabled = false; playBtn.textContent = '▶ Ouvir Exemplo'; return; }
+        if (idx >= lines.length) { playBtn.disabled = false; playBtn.textContent = '▶ Simular conversa'; return; }
         const div = document.createElement('div');
         div.className = 'msg user';
         div.textContent = lines[idx];
@@ -109,7 +109,7 @@ playBtn?.addEventListener('click', () => {
         idx++;
         setTimeout(addLine, 1400);
     }
-    playBtn.textContent = 'Reproduzindo...';
+    playBtn.textContent = 'Simulando...';
     addLine();
 });
 
