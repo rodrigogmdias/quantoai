@@ -24,6 +24,7 @@ const seed = [
 let convo = [...seed];
 
 function renderChat() {
+    if (!demoChat) return; // evita erro quando a demo não está presente
     demoChat.innerHTML = '';
     convo.forEach(m => {
         const div = document.createElement('div');
@@ -115,3 +116,70 @@ playBtn?.addEventListener('click', () => {
 // Bloco de newsletter removido (form não está presente na página)
 
 // Marquee usa apenas CSS; nenhuma manipulação de estilo inline necessária
+
+// Modal de seleção de canal (WhatsApp/Telegram)
+const channelModal = document.getElementById('channelModal');
+const closeChannelModal = document.getElementById('closeChannelModal');
+const chooseWhatsApp = document.getElementById('chooseWhatsApp');
+const chooseTelegram = document.getElementById('chooseTelegram');
+let pendingPlan = null; // '24h' | '7d' | '30d'
+
+function openChannelModal(plan) {
+    pendingPlan = plan || null;
+    channelModal?.classList.add('open');
+    channelModal?.setAttribute('aria-hidden', 'false');
+    // focus trap básico
+    setTimeout(() => closeChannelModal?.focus(), 10);
+}
+function closeModal() {
+    channelModal?.classList.remove('open');
+    channelModal?.setAttribute('aria-hidden', 'true');
+}
+
+document.querySelectorAll('.open-subscribe').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const plan = btn.getAttribute('data-plan');
+        openChannelModal(plan);
+    });
+});
+
+closeChannelModal?.addEventListener('click', closeModal);
+channelModal?.addEventListener('click', (e) => {
+    if (e.target && (e.target.matches('[data-close-modal]') || e.target === channelModal)) {
+        closeModal();
+    }
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && channelModal?.classList.contains('open')) closeModal();
+});
+
+// Redirecionamentos dos canais
+const WHATSAPP_NUMBER = '5531973560034'; // formato internacional sem +
+const TELEGRAM_HANDLE = 'quantoaibot';
+
+function buildUtm(plan) {
+    const p = plan || 'na';
+    const ts = Date.now();
+    return `utm_source=lp&utm_medium=modal&utm_campaign=signup&utm_content=${encodeURIComponent(p)}-${ts}`;
+}
+
+chooseWhatsApp?.addEventListener('click', () => {
+    // wa.me supports text param
+    const text = `Quero ativar o Quanto AI (${pendingPlan || 'plano não selecionado'}).`;
+    const utm = buildUtm(pendingPlan);
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}%20${encodeURIComponent(utm)}`;
+    window.open(url, '_blank', 'noopener');
+    closeModal();
+});
+
+chooseTelegram?.addEventListener('click', () => {
+    const utm = buildUtm(pendingPlan);
+    // Telegram deep link with start param
+    const startParam = encodeURIComponent(`from=lp&plan=${pendingPlan || 'na'}`);
+    const url = `https://t.me/${TELEGRAM_HANDLE}?start=${startParam}`;
+    // Anexar UTM ao referrer via hash (não padrão do Telegram, mas útil se abrirem no browser)
+    const withUtm = `${url}#${utm}`;
+    window.open(withUtm, '_blank', 'noopener');
+    closeModal();
+});

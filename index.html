@@ -92,7 +92,12 @@
             PDF.
           </p>
           <div class="hero-cta">
-            <a href="#canais" class="btn primary btn-lg">Experimente Grátis</a>
+            <a
+              href="#canais"
+              class="btn primary btn-lg open-subscribe"
+              data-plan="trial"
+              >Experimente Grátis</a
+            >
             <button
               class="btn outline btn-lg"
               id="play-audio-demo"
@@ -289,7 +294,9 @@
               <li>Voz e texto</li>
               <li>Exportação PDF</li>
             </ul>
-            <a href="#canais" class="btn outline block">Começar 24h</a>
+            <a href="#" class="btn outline block open-subscribe" data-plan="24h"
+              >Começar 24h</a
+            >
           </div>
           <div class="price-card">
             <h3>7 Dias</h3>
@@ -303,7 +310,9 @@
               <li>Refinamentos ilimitados</li>
               <li>Compartilhamento por link</li>
             </ul>
-            <a href="#canais" class="btn outline block">Ativar 7 dias</a>
+            <a href="#" class="btn outline block open-subscribe" data-plan="7d"
+              >Ativar 7 dias</a
+            >
           </div>
           <div class="price-card highlight">
             <div class="badge">Melhor Opção</div>
@@ -317,7 +326,9 @@
               <li>Suporte prioritário</li>
               <li>Atualizações contínuas</li>
             </ul>
-            <a href="#canais" class="btn primary block">Assinar 30 dias</a>
+            <a href="#" class="btn primary block open-subscribe" data-plan="30d"
+              >Assinar 30 dias</a
+            >
           </div>
         </div>
         <div class="pricing-note">
@@ -326,35 +337,115 @@
       </div>
     </section>
 
-    <section class="benefits" id="canais">
+    <section class="channels" id="canais">
       <div class="container">
         <h2>Canais de Acesso</h2>
-        <div class="benefit-grid">
-          <div class="benefit">
-            <h3>WhatsApp</h3>
+        <p class="section-sub">
+          Converse pelo app que preferir. Voz e texto com histórico contínuo.
+        </p>
+        <div class="channel-grid">
+          <article class="channel-card wa">
+            <div class="card-top">
+              <div class="ico-wrap" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label=""
+                >
+                  <path
+                    fill="#fff"
+                    d="M16.01 3C9.38 3 4 8.38 4 15.01c0 2.65.9 5.09 2.42 7.02L5 29l7.17-1.35A11.93 11.93 0 0 0 16 27c6.63 0 12.01-5.38 12.01-12.01S22.64 3 16.01 3Zm6.99 16.87c-.29.82-1.41 1.51-2.18 1.71-.58.15-1.33.27-2.16.17-.5-.06-1.14-.18-1.97-.54-3.47-1.5-5.74-5-5.91-5.23-.17-.23-1.41-1.88-1.41-3.59 0-1.71.89-2.54 1.21-2.89.32-.35.7-.44.94-.44.23 0 .47 0 .68.01.22.01.51-.08.8.61.29.7.99 2.42 1.08 2.6.09.17.15.38.03.61-.12.23-.18.38-.36.59-.18.21-.38.47-.54.63-.18.18-.37.37-.16.73.21.35.94 1.54 2.02 2.49 1.39 1.19 2.56 1.57 2.92 1.75.36.18.57.15.78-.09.21-.23.9-1.05 1.14-1.41.23-.35.48-.3.8-.18.32.12 2.04.96 2.39 1.13.35.18.58.26.66.41.08.15.08.88-.21 1.7Z"
+                  />
+                </svg>
+              </div>
+              <div class="title-area">
+                <h3>WhatsApp</h3>
+                <div class="status">
+                  <span class="dot"></span> Disponível 24/7
+                </div>
+              </div>
+            </div>
             <p>
-              Use direto no seu dia a dia:
+              Use direto no seu dia a dia e gere PDFs sem sair das conversas.
+              Número: <strong>+55 31 97356-0034</strong>.
+            </p>
+            <ul class="tags" aria-label="Recursos">
+              <li>Voz e texto</li>
+              <li>Envio de PDF</li>
+              <li>Histórico</li>
+            </ul>
+            <div class="card-actions">
               <a
-                href="https://wa.me/31973560034"
+                class="btn primary"
+                href="https://wa.me/5531973560034?text=Quero%20usar%20o%20Quanto%20AI"
                 target="_blank"
                 rel="noopener noreferrer"
-                >+31 97356-0034</a
-              >. Inicie dizendo o que deseja orçar.
-            </p>
-          </div>
-          <div class="benefit">
-            <h3>Telegram</h3>
-            <p>
-              Acesse o bot em
+                aria-label="Abrir conversa no WhatsApp"
+                >Abrir no WhatsApp</a
+              >
               <a
+                class="btn outline"
+                href="https://wa.me/5531973560034"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Ver número</a
+              >
+            </div>
+          </article>
+          <article class="channel-card tg">
+            <div class="card-top">
+              <div class="ico-wrap" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label=""
+                >
+                  <path
+                    fill="#fff"
+                    d="M28.65 5.46c-.44-.37-1.06-.46-1.8-.26l-22 6.2c-.77.22-1.24.62-1.3 1.13-.07.55.41 1.05 1.31 1.35l5.64 1.83 2.19 6.98c.15.49.5.82.95.9.44.08.9-.12 1.24-.53l3-3.6 5.7 4.21c.34.25.75.39 1.15.39.22 0 .44-.04.64-.13.57-.23.98-.72 1.13-1.36L29.9 7.34c.17-.7.02-1.28-.25-1.57ZM12.6 22.37l-1.88-5.99 10.9-6.71-9.02 8.79v.01l7.7-4.86-7.7 8.76Z"
+                  />
+                </svg>
+              </div>
+              <div class="title-area">
+                <h3>Telegram</h3>
+                <div class="status"><span class="dot"></span> Bot oficial</div>
+              </div>
+            </div>
+            <p>
+              Acesse o bot <strong>@quantoaibot</strong> e comece com
+              <code>/start</code>. Ideal para desktop e múltiplos dispositivos.
+            </p>
+            <ul class="tags" aria-label="Recursos">
+              <li>Comandos rápidos</li>
+              <li>PDF por link</li>
+              <li>Multi-dispositivo</li>
+            </ul>
+            <div class="card-actions">
+              <a
+                class="btn primary"
+                href="https://t.me/quantoaibot?start=from%3Alp"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Abrir bot no Telegram"
+                >Abrir no Telegram</a
+              >
+              <a
+                class="btn outline"
                 href="https://t.me/quantoaibot"
                 target="_blank"
                 rel="noopener noreferrer"
-                >@quantoaibot</a
+                >Ver @handle</a
               >
-              e comece a gerar PDFs com /start.
-            </p>
-          </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -450,6 +541,50 @@
         <span>Feito com ♡ no Brasil</span>
       </div>
     </footer>
+
+    <!-- Modal de seleção de canal -->
+    <div
+      class="modal"
+      id="channelModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="channelModalTitle"
+    >
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-content" role="document">
+        <button
+          class="modal-close"
+          id="closeChannelModal"
+          aria-label="Fechar modal"
+        >
+          ×
+        </button>
+        <h3 id="channelModalTitle">Onde quer continuar?</h3>
+        <p class="modal-sub">
+          Escolha o canal para falar com o bot e ativar seu acesso.
+        </p>
+        <div class="channel-actions">
+          <button class="channel-btn whatsapp" id="chooseWhatsApp">
+            <span class="ico">🟢</span>
+            <span>
+              <strong>WhatsApp</strong>
+              <small>Conversar agora no WhatsApp</small>
+            </span>
+          </button>
+          <button class="channel-btn telegram" id="chooseTelegram">
+            <span class="ico">🔵</span>
+            <span>
+              <strong>Telegram</strong>
+              <small>Continuar no bot do Telegram</small>
+            </span>
+          </button>
+        </div>
+        <p class="modal-mini">
+          Você será redirecionado para o aplicativo escolhido.
+        </p>
+      </div>
+    </div>
 
     <script src="./src/app.js"></script>
   </body>
