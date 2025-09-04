@@ -392,14 +392,14 @@
               </div>
               <div class="title-area">
                 <h3>WhatsApp</h3>
-                <div class="status">
-                  <span class="dot"></span> Disponível 24/7
+                <div class="status soon">
+                  <span class="dot"></span> Em breve
                 </div>
               </div>
             </div>
             <p>
-              Use direto no seu dia a dia e gere PDFs sem sair das conversas.
-              Número: <strong>+55 31 97356-0034</strong>.
+              Use direto no seu dia a dia e gere PDFs sem sair das conversas. Em
+              breve.
             </p>
             <ul class="tags" aria-label="Recursos">
               <li>Voz e texto</li>
@@ -407,21 +407,14 @@
               <li>Histórico</li>
             </ul>
             <div class="card-actions">
-              <a
+              <button
                 class="btn primary"
-                href="https://wa.me/5531973560034?text=Quero%20usar%20o%20Quanto%20AI"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abrir conversa no WhatsApp"
-                >Abrir no WhatsApp</a
+                disabled
+                aria-disabled="true"
+                aria-label="WhatsApp em breve"
               >
-              <a
-                class="btn outline"
-                href="https://wa.me/5531973560034"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Ver número</a
-              >
+                Em breve
+              </button>
             </div>
           </article>
           <article class="channel-card tg">
@@ -594,11 +587,16 @@
           Escolha o canal para falar com o bot e ativar seu acesso.
         </p>
         <div class="channel-actions">
-          <button class="channel-btn whatsapp" id="chooseWhatsApp">
+          <button
+            class="channel-btn whatsapp"
+            id="chooseWhatsApp"
+            disabled
+            aria-disabled="true"
+          >
             <span class="ico">🟢</span>
             <span>
               <strong>WhatsApp</strong>
-              <small>Conversar agora no WhatsApp</small>
+              <small>Em breve</small>
             </span>
           </button>
           <button class="channel-btn telegram" id="chooseTelegram">

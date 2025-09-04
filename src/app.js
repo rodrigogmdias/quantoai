@@ -164,7 +164,8 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Redirecionamentos dos canais
-const WHATSAPP_NUMBER = '5531973560034'; // formato internacional sem +
+// WhatsApp temporariamente indisponível
+const WHATSAPP_NUMBER = null; // em breve
 const TELEGRAM_HANDLE = 'quantoaibot';
 
 function buildUtm(plan) {
@@ -173,19 +174,10 @@ function buildUtm(plan) {
     return `utm_source=lp&utm_medium=modal&utm_campaign=signup&utm_content=${encodeURIComponent(p)}-${ts}`;
 }
 
-chooseWhatsApp?.addEventListener('click', () => {
-    // GA: clique para WhatsApp via modal
-    gaEvent('contact_click', {
-        channel: 'whatsapp',
-        source: 'modal',
-        plan: pendingPlan || 'na'
-    });
-    // wa.me supports text param
-    const text = `Quero ativar o Quanto AI (${pendingPlan || 'plano não selecionado'}).`;
-    const utm = buildUtm(pendingPlan);
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}%20${encodeURIComponent(utm)}`;
-    window.open(url, '_blank', 'noopener');
-    closeModal();
+// Desativado: manter handler vazio por acessibilidade caso o botão seja habilitado no futuro
+chooseWhatsApp?.addEventListener('click', (e) => {
+    e.preventDefault();
+    // opcional: feedback visual no futuro
 });
 
 chooseTelegram?.addEventListener('click', () => {
@@ -206,16 +198,7 @@ chooseTelegram?.addEventListener('click', () => {
 });
 
 // GA: cliques diretos nos cards de canais (seção "Canais de Acesso")
-document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a => {
-    a.addEventListener('click', () => {
-        gaEvent('contact_click', {
-            channel: 'whatsapp',
-            source: 'channels_section',
-            intent: a.href.includes('text=') ? 'start_chat' : 'view_number',
-            link_text: (a.textContent || '').trim().slice(0, 100)
-        });
-    });
-});
+// Não há links de WhatsApp ativos no momento
 
 document.querySelectorAll('a[href^="https://t.me/"]').forEach(a => {
     a.addEventListener('click', () => {
