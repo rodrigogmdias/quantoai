@@ -376,14 +376,14 @@
               </div>
               <div class="title-area">
                 <h3>WhatsApp</h3>
-                <div class="status soon">
-                  <span class="dot"></span> Em breve
+                <div class="status">
+                  <span class="dot"></span> Disponível
                 </div>
               </div>
             </div>
             <p>
-              Use direto no seu dia a dia e gere PDFs sem sair das conversas. Em
-              breve.
+              Use direto no seu WhatsApp e gere PDFs sem sair das conversas. O
+              bot responde 24/7.
             </p>
             <ul class="tags" aria-label="Recursos">
               <li>Voz e texto</li>
@@ -391,14 +391,17 @@
               <li>Histórico</li>
             </ul>
             <div class="card-actions">
-              <button
+              <a
+                href="https://wa.me/5531997204935"
                 class="btn primary"
-                disabled
-                aria-disabled="true"
-                aria-label="WhatsApp em breve"
+                data-whatsapp-link
+                data-source="channels_section"
+                data-plan="channels"
+                target="_blank"
+                rel="noopener"
               >
-                Em breve
-              </button>
+                Chamar no WhatsApp
+              </a>
             </div>
           </article>
           <article class="channel-card tg">
@@ -575,13 +578,12 @@
           <button
             class="channel-btn whatsapp"
             id="chooseWhatsApp"
-            disabled
-            aria-disabled="true"
+            type="button"
           >
             <span class="ico">🟢</span>
             <span>
               <strong>WhatsApp</strong>
-              <small>Em breve</small>
+              <small>Continuar pelo WhatsApp</small>
             </span>
           </button>
           <button class="channel-btn telegram" id="chooseTelegram">

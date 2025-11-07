@@ -164,8 +164,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Redirecionamentos dos canais
-// WhatsApp temporariamente indisponível
-const WHATSAPP_NUMBER = null; // em breve
+const WHATSAPP_NUMBER = '5531997204935';
 const TELEGRAM_HANDLE = 'quantoaibot';
 
 function buildUtm(plan) {
@@ -174,10 +173,25 @@ function buildUtm(plan) {
     return `utm_source=lp&utm_medium=modal&utm_campaign=signup&utm_content=${encodeURIComponent(p)}-${ts}`;
 }
 
-// Desativado: manter handler vazio por acessibilidade caso o botão seja habilitado no futuro
-chooseWhatsApp?.addEventListener('click', (e) => {
-    e.preventDefault();
-    // opcional: feedback visual no futuro
+function buildWhatsAppUrl() {
+    const base = `https://wa.me/${WHATSAPP_NUMBER}`;
+    const text = encodeURIComponent('Olá! Quero usar o Quanto AI.');
+    return `${base}?text=${text}`;
+}
+
+function openWhatsApp({ plan = 'na', source = 'unknown' } = {}) {
+    gaEvent('contact_click', {
+        channel: 'whatsapp',
+        source,
+        plan
+    });
+    const url = buildWhatsAppUrl();
+    window.open(url, '_blank', 'noopener');
+}
+
+chooseWhatsApp?.addEventListener('click', () => {
+    openWhatsApp({ source: 'modal', plan: pendingPlan || 'na' });
+    closeModal();
 });
 
 chooseTelegram?.addEventListener('click', () => {
@@ -198,8 +212,6 @@ chooseTelegram?.addEventListener('click', () => {
 });
 
 // GA: cliques diretos nos cards de canais (seção "Canais de Acesso")
-// Não há links de WhatsApp ativos no momento
-
 document.querySelectorAll('a[href^="https://t.me/"]').forEach(a => {
     a.addEventListener('click', () => {
         gaEvent('contact_click', {
@@ -208,5 +220,14 @@ document.querySelectorAll('a[href^="https://t.me/"]').forEach(a => {
             intent: a.href.includes('?start=') ? 'start_bot' : 'view_bot',
             link_text: (a.textContent || '').trim().slice(0, 100)
         });
+    });
+});
+
+document.querySelectorAll('[data-whatsapp-link]').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const plan = link.getAttribute('data-plan') || 'na';
+        const source = link.getAttribute('data-source') || 'channels_section';
+        openWhatsApp({ plan, source });
     });
 });
