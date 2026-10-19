@@ -5,10 +5,18 @@ navToggle?.addEventListener('click', () => navLinks.classList.toggle('open'));
 
 // Utilitário: envio seguro de eventos GA4
 function gaEvent(name, params = {}) {
+    if (name === 'contact_click') metaEvent('Contact', { content_category: params.channel, content_name: params.plan || params.source });
     try {
         if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
             window.gtag('event', name, params);
         }
+    } catch (_) { /* noop */ }
+}
+
+// Pixel da Meta: clique para falar no WhatsApp/Telegram vira "Contact" (otimização de campanhas)
+function metaEvent(name, params = {}) {
+    try {
+        if (typeof window.fbq === 'function') window.fbq('track', name, params);
     } catch (_) { /* noop */ }
 }
 
