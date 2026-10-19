@@ -239,7 +239,7 @@ chooseTelegram?.addEventListener('click', () => {
 // GA: cliques diretos nos cards de canais (seção "Canais de Acesso")
 document.querySelectorAll('a[href^="https://t.me/"]').forEach(a => {
     // links diretos para o bot também levam a origem
-    if (!a.href.includes('?start=')) a.href = `${a.href.split('?')[0]}?start=${buildRef(null)}`;
+    a.href = `${a.href.split('?')[0]}?start=${buildRef(null)}`;
     a.addEventListener('click', () => {
         gaEvent('contact_click', {
             channel: 'telegram',
