@@ -61,7 +61,7 @@ function botRespond(userText) {
         return 'Apliquei desconto de 5% sobre o total. Ajustar porcentagem?';
     }
     if (/imposto|taxa|icms|iss/.test(lower)) {
-        return 'Calculei impostos conforme configuração padrão (ISS 3%). Quer modificar a alíquota?';
+        return 'Incluí os impostos que você informou nos totais. Quer ajustar algum valor?';
     }
     if (/pdf|finaliza|gerar/.test(lower)) {
         return 'Gerando PDF com itens, totais e condições... pronto! (Simulação)';
@@ -167,15 +167,40 @@ document.addEventListener('keydown', (e) => {
 const WHATSAPP_NUMBER = '5531997204935';
 const TELEGRAM_HANDLE = 'quantoaibot';
 
+// Origem do visitante (UTM/clid) guardada na sessão e enviada ao bot como código "ref".
+// Formato: <origem>_<plano>_<campanha>, só [A-Za-z0-9_-] (limite do start param do Telegram).
+const SRC_MAP = { instagram: 'ig', ig: 'ig', facebook: 'fb', fb: 'fb', meta: 'fb', google: 'gg', tiktok: 'tt', youtube: 'yt', whatsapp: 'wa' };
+function readOrigin() {
+    try {
+        const q = new URLSearchParams(location.search);
+        const saved = JSON.parse(sessionStorage.getItem('qa_origin') || 'null');
+        if (!q.get('utm_source') && !q.get('gclid') && !q.get('fbclid') && saved) return saved;
+        let src = (q.get('utm_source') || '').toLowerCase();
+        src = SRC_MAP[src] || src.replace(/[^a-z0-9]/g, '').slice(0, 6);
+        if (!src) src = q.get('gclid') ? 'gg' : q.get('fbclid') ? 'fb' : (document.referrer && !document.referrer.includes(location.host) ? 'ref' : 'site');
+        const campaign = (q.get('utm_campaign') || '').replace(/[^A-Za-z0-9-]/g, '').slice(0, 24);
+        const origin = { src, campaign };
+        sessionStorage.setItem('qa_origin', JSON.stringify(origin));
+        return origin;
+    } catch {
+        return { src: 'site', campaign: '' };
+    }
+}
+const ORIGIN = readOrigin();
+const PLAN_CODE = { '24h': 'd1', '7d': 'd7', '30d': 'd30' };
+function buildRef(plan) {
+    return [ORIGIN.src, PLAN_CODE[plan] || 'x', ORIGIN.campaign].filter(Boolean).join('_').slice(0, 60);
+}
+
 function buildUtm(plan) {
     const p = plan || 'na';
     const ts = Date.now();
     return `utm_source=lp&utm_medium=modal&utm_campaign=signup&utm_content=${encodeURIComponent(p)}-${ts}`;
 }
 
-function buildWhatsAppUrl() {
+function buildWhatsAppUrl(plan) {
     const base = `https://wa.me/${WHATSAPP_NUMBER}`;
-    const text = encodeURIComponent('Olá! Quero usar o Quanto AI.');
+    const text = encodeURIComponent(`Olá! Quero usar o Quanto AI. (ref: ${buildRef(plan)})`);
     return `${base}?text=${text}`;
 }
 
@@ -185,7 +210,7 @@ function openWhatsApp({ plan = 'na', source = 'unknown' } = {}) {
         source,
         plan
     });
-    const url = buildWhatsAppUrl();
+    const url = buildWhatsAppUrl(plan);
     window.open(url, '_blank', 'noopener');
 }
 
@@ -203,7 +228,7 @@ chooseTelegram?.addEventListener('click', () => {
     });
     const utm = buildUtm(pendingPlan);
     // Telegram deep link with start param
-    const startParam = encodeURIComponent(`from=lp&plan=${pendingPlan || 'na'}`);
+    const startParam = buildRef(pendingPlan);
     const url = `https://t.me/${TELEGRAM_HANDLE}?start=${startParam}`;
     // Anexar UTM ao referrer via hash (não padrão do Telegram, mas útil se abrirem no browser)
     const withUtm = `${url}#${utm}`;
@@ -213,6 +238,8 @@ chooseTelegram?.addEventListener('click', () => {
 
 // GA: cliques diretos nos cards de canais (seção "Canais de Acesso")
 document.querySelectorAll('a[href^="https://t.me/"]').forEach(a => {
+    // links diretos para o bot também levam a origem
+    if (!a.href.includes('?start=')) a.href = `${a.href.split('?')[0]}?start=${buildRef(null)}`;
     a.addEventListener('click', () => {
         gaEvent('contact_click', {
             channel: 'telegram',
